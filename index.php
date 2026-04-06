@@ -61,7 +61,7 @@ $destacados = ['pikachu', 'charizard', 'mewtwo', 'bulbasaur', 'gengar', 'eevee',
                                 type="text"
                                 name="pokemon"
                                 class="search-input"
-                                placeholder="Nombre o número (pikachu, 25, charizard…)"
+                                placeholder="Nombre o número (pikachu, 25, charizard…). Existen hasta 1025 Pokémon registrados."
                                 value="<?= e($busqueda) ?>"
                                 autocomplete="off"
                                 autofocus

@@ -1,51 +1,51 @@
-// Animate stat bars on page load
+// Animar las barras de estadísticas al cargar la página
 document.addEventListener('DOMContentLoaded', () => {
-    document.querySelectorAll('.stat-bar__fill').forEach((bar) => {
-        const width = bar.dataset.width + '%';
-        bar.style.width = '0%';
+    document.querySelectorAll('.stat-bar__fill').forEach((statBarFill) => {
+        const targetWidth = statBarFill.dataset.width + '%';
+        statBarFill.style.width = '0%';
         requestAnimationFrame(() => {
             setTimeout(() => {
-                bar.style.width = width;
+                statBarFill.style.width = targetWidth;
             }, 60);
         });
     });
 });
 
-// Toggle shiny/normal sprite
+// Cambiar entre sprite normal y shiny
 function toggleShiny() {
-    const img = document.getElementById('poke-sprite');
-    const btn = document.querySelector('.shiny-btn');
+    const spriteImage = document.getElementById('poke-sprite');
+    const shinyButton = document.querySelector('.shiny-btn');
 
-    if (!img || !btn) {
+    if (!spriteImage || !shinyButton) {
         return;
     }
 
-    const normal = img.dataset.normal;
-    const shiny = img.dataset.shiny;
+    const normalSprite = spriteImage.dataset.normal;
+    const shinySprite = spriteImage.dataset.shiny;
 
-    if (!normal || !shiny) {
+    if (!normalSprite || !shinySprite) {
         return;
     }
 
-    if (img.dataset.mode === 'shiny') {
-        img.src = normal;
-        img.dataset.mode = 'normal';
-        btn.textContent = '✨ Ver Shiny';
+    if (spriteImage.dataset.mode === 'shiny') {
+        spriteImage.src = normalSprite;
+        spriteImage.dataset.mode = 'normal';
+        shinyButton.textContent = '✨ Ver Shiny';
         return;
     }
 
-    img.src = shiny;
-    img.dataset.mode = 'shiny';
-    btn.textContent = '🔙 Ver Normal';
+    spriteImage.src = shinySprite;
+    spriteImage.dataset.mode = 'shiny';
+    shinyButton.textContent = '🔙 Ver Normal';
 }
 
-// Toggle JSON output visibility
+// Mostrar u ocultar el JSON
 function toggleJson() {
-    const el = document.getElementById('json-out');
+    const jsonOutput = document.getElementById('json-out');
 
-    if (!el) {
+    if (!jsonOutput) {
         return;
     }
 
-    el.style.display = el.style.display === 'none' ? 'block' : 'none';
+    jsonOutput.style.display = jsonOutput.style.display === 'none' ? 'block' : 'none';
 }

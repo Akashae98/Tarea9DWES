@@ -1,10 +1,12 @@
 <?php
 require_once 'functions.php';
 
+//Preparar variables para la vista
 $pokemon = null;
 $error = null;
 $busqueda = '';
-// Si se ha enviado el formulario de búsqueda, procesamos la consulta
+
+// Procesar la búsqueda si viene por GET
 if (isset($_GET['pokemon'])) {
     $busqueda = trim($_GET['pokemon']);
     $pokemon  = buscarPokemon($busqueda);
@@ -13,8 +15,14 @@ if (isset($_GET['pokemon'])) {
         $error = "No se encontró el Pokémon \"$busqueda\". Prueba con otro nombre o número.";
     }
 }
-
+// Datos para la vista
 $destacados = ['pikachu', 'charizard', 'mewtwo', 'bulbasaur', 'gengar', 'eevee', 'snorlax', 'lucario'];
+$pokemonTypes = $pokemon['tipos'] ?? [];
+$pokemonAbilities = $pokemon['habilidades'] ?? [];
+$pokemonStats = $pokemon['stats'] ?? [];
+$spriteNormal = $pokemon['sprite'] ?? null;
+$spriteShiny = $pokemon['sprite_shiny'] ?? null;
+$pokemonColor = $pokemon ? colorTipoPokemon($pokemonTypes[0] ?? 'normal') : '#78909C';
 ?>
 
 <!DOCTYPE html>
@@ -91,92 +99,10 @@ $destacados = ['pikachu', 'charizard', 'mewtwo', 'bulbasaur', 'gengar', 'eevee',
                 </div>
             <?php endif; ?>
 
+            <!-- Si hay datos de Pokémon, mostramos la tarjeta -->
             <?php if ($pokemon): ?>
-                <?php $color = colorTipoPokemon($pokemon['tipos'][0] ?? 'normal'); ?>
-
-                <div class="pokemon-card" style="--poke-color: <?= e($color) ?>;">
-
-                    <div class="pokemon-card__header">
-                        <div class="pokemon-info">
-                            <div class="pokemon-number">#<?= e(str_pad((string) $pokemon['id'], 4, '0', STR_PAD_LEFT)) ?></div>
-                            <h2 class="pokemon-name"><?= e($pokemon['nombre']) ?></h2>
-
-                            <div class="pokemon-types">
-                                <?php foreach ($pokemon['tipos'] as $tipo): ?>
-                                    <span class="type-badge" style="background:<?= e(colorTipoPokemon($tipo)) ?>">
-                                        <?= e($tipo) ?>
-                                    </span>
-                                <?php endforeach; ?>
-                            </div>
-
-                            <div class="pokemon-meta">
-                                <div class="meta-item">
-                                    <span class="meta-label">Altura</span>
-                                    <span class="meta-value"><?= e($pokemon['altura']) ?></span>
-                                </div>
-                                <div class="meta-item">
-                                    <span class="meta-label">Peso</span>
-                                    <span class="meta-value"><?= e($pokemon['peso']) ?></span>
-                                </div>
-                            </div>
-
-                            <div class="pokemon-abilities">
-                                <div class="abilities-label">Habilidades</div>
-                                <div class="abilities-list">
-                                    <?php foreach ($pokemon['habilidades'] as $hab): ?>
-                                        <span class="ability-tag"><?= e($hab) ?></span>
-                                    <?php endforeach; ?>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="pokemon-sprite-wrap">
-                            <?php if ($pokemon['sprite']): ?>
-                                <img
-                                    id="poke-sprite"
-                                    src="<?= e((string) $pokemon['sprite']) ?>"
-                                    data-normal="<?= e((string) $pokemon['sprite']) ?>"
-                                    data-shiny="<?= e((string) $pokemon['sprite_shiny'] ?? '') ?>"
-                                    data-mode="normal"
-                                    alt="<?= e($pokemon['nombre']) ?>"
-                                    class="pokemon-sprite"
-                                >
-                            <?php endif; ?>
-                            <?php if ($pokemon['sprite_shiny']): ?>
-                                <button type="button" class="shiny-btn" onclick="toggleShiny()">✨ Ver Shiny</button>
-                            <?php endif; ?>
-                        </div>
-                    </div>
-
-                    <div class="pokemon-stats">
-                        <h3 class="stats-title">Estadísticas Base</h3>
-                        <div class="stats-grid">
-                            <?php foreach ($pokemon['stats'] as $stat => $valor): ?>
-                                <div class="stat-row">
-                                    <div class="stat-name"><?= e($stat) ?></div>
-                                    <div class="stat-bar-wrap">
-                                        <div class="stat-bar">
-                                            <div class="stat-bar__fill"
-                                                 data-width="<?= min(($valor/255)*100, 100) ?>"
-                                                 style="background:<?= e($color) ?>;">
-                                            </div>
-                                        </div>
-                                        <div class="stat-value"><?= e((string) $valor) ?></div>
-                                    </div>
-                                </div>
-                            <?php endforeach; ?>
-                        </div>
-                    </div>
-
-                    <div class="json-section">
-                        <div class="json-header">
-                            <span>📋 Respuesta JSON procesada</span>
-                            <button onclick="toggleJson()" class="json-btn">Mostrar / Ocultar</button>
-                        </div>
-                        <pre id="json-out" class="json-out" style="display:none"><code><?= e((string) json_encode($pokemon, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE)) ?></code></pre>
-                    </div>
-                </div>
-
+                <?php include __DIR__ . '/views/pokemon-card.php'; ?>
+            <!-- Si no hay búsqueda, mostramos un estado vacío con instrucciones -->
             <?php elseif ($busqueda === ''): ?>
 
                 <div class="empty-state">

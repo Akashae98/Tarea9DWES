@@ -1,10 +1,9 @@
 <!-- Tarjeta visual con los datos del Pokémon buscado -->
 
 <div class="pokemon-card" style="--poke-color: <?= e($pokemonColor) ?>;">
-
     <div class="pokemon-card__header">
         <div class="pokemon-info">
-            <div class="pokemon-number">#<?= e(str_pad((string) $pokemon['id'], 4, '0', STR_PAD_LEFT)) ?></div>
+            <div class="pokemon-number"><?= e($pokemonNumber) ?></div>
             <h2 class="pokemon-name"><?= e($pokemon['nombre']) ?></h2>
 
             <div class="pokemon-types">
@@ -80,6 +79,6 @@
             <span>📋 Respuesta JSON procesada</span>
             <button onclick="toggleJson()" class="json-btn">Mostrar / Ocultar</button>
         </div>
-        <pre id="json-out" class="json-out" style="display:none"><code><?= e((string) json_encode($pokemon, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE)) ?></code></pre>
+        <pre id="json-out" class="json-out" style="display:none"><code><?= e($pokemonJson) ?></code></pre>
     </div>
 </div>

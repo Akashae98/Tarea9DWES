@@ -23,6 +23,8 @@ $pokemonStats = $pokemon['stats'] ?? [];
 $spriteNormal = $pokemon['sprite'] ?? null;
 $spriteShiny = $pokemon['sprite_shiny'] ?? null;
 $pokemonColor = $pokemon ? colorTipoPokemon($pokemonTypes[0] ?? 'normal') : '#78909C';
+$pokemonNumber = $pokemon ? '#' . str_pad((string) $pokemon['id'], 4, '0', STR_PAD_LEFT) : '';
+$pokemonJson = $pokemon ? (string) json_encode($pokemon, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE) : '';
 ?>
 
 <!DOCTYPE html>

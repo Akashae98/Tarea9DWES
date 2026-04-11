@@ -21,6 +21,9 @@
 function buscarPokemon($nombre) {
     // Normaliza el nombre para la URL y realiza la petición
     $nombre = strtolower(trim($nombre));
+    if ($nombre === '') {
+        return null;
+    }
     // Usamos file_get_contents() para obtener los datos JSON de la API
     $json = @file_get_contents("https://pokeapi.co/api/v2/pokemon/{$nombre}");
     // Si la respuesta es falsa, el Pokémon no existe o hubo un error

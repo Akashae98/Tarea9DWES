@@ -1,31 +1,31 @@
-# Tarea 9 DWES
+# ⚡ PokéAPI Explorer
 
-Mini aplicación en PHP para consultar PokeAPI y mostrar el resultado del pokémon en una página web.
+Mini aplicación en PHP para consultar la PokéAPI y mostrar la información de cualquier Pokémon en una página web moderna.
 
-## Incluye
+## 📦 Incluye
 
-- `index.php`: buscador principal de Pokémon.
-- `functions.php`: funciones para consultar la API y formatear los datos.
-- `style.css`: estilos visuales.
+- `index.php` — Buscador principal de Pokémon.
+- `functions.php` — Funciones para consultar la API y formatear los datos.
+- `style.css` — Estilos visuales modernos.
 
-## Servicio web usado
+## 🌐 Servicio web usado
 
-Se ha usado PokeAPI, una API pública gratuita para pruebas.
+Se ha utilizado [PokéAPI](https://pokeapi.co/), una API pública y gratuita para desarrolladores.
 
-- Sitio oficial: https://pokeapi.co/
-- Endpoint principal: `https://pokeapi.co/api/v2/pokemon/{nombre}`
+- 🔗 Sitio oficial: https://pokeapi.co/
+- 📡 Endpoint principal: `https://pokeapi.co/api/v2/pokemon/{nombre}`
 
-La web permite buscar Pokémon por nombre o por número de Pokédex.
+La web permite buscar Pokémon por **nombre** o por **número de Pokédex**.
 
-## Ejecución local
+## 🚀 Ejecución local
 
-1. Copia el proyecto en `C:\xampp\htdocs\Tarea9DWES`.
-2. Arranca Apache en XAMPP.
-3. Abre `http://localhost/Tarea9DWES/`.
-4. Escribe un nombre como `pikachu`, `charizard` o un número como `25`.
+1. 📁 Copia el proyecto en `C:\xampp\htdocs\.
+2. ▶️ Arranca Apache desde el panel de **XAMPP**.
+3. 🌍 Abre en tu navegador: `http://localhost/PokeApi`.
+4. 🔍 Escribe un nombre como `pikachu`, `charizard` o un número como `25`.
 
+## 📚 PHPDoc
 
-## PHPDoc
+Las funciones de `functions.php` incluyen comentarios `/** */` con etiquetas `@param` y `@return`.
 
-Las funciones de `functions.php` incluyen comentarios `/** */` con `@param` y `@return`.
-Puedes consultar la documentacion visualmente en Tarea9DWES_doc.
+📖 Puedes consultar la documentación visual en la carpeta `Tarea9DWES_doc`.
